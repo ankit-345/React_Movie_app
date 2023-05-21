@@ -1,13 +1,553 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto+Slab&display=swap');
+
+*,
+*::before,
+*::after{
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+  background-color: black;
+  font-family: 'PT Sans', sans-serif;
+  position: relative;
 }
+
+a{
+  text-decoration: none;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.header{
+  background-color: black;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Roboto Slab', serif;
+}
+
+.header-left{
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.search_box{
+  border: 1px solid white;
+  background-color: white;
+  padding: 7px 12px;
+  border-radius: 8px;
+  width: 287px;
+  display: flex;
+}
+
+.input{
+  border: none;
+  background-color: transparent;
+  flex: 1;
+}
+
+.input:focus{
+   outline: none;
+}
+
+.header .logo{
+  width: 75px;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.header .nav-links{
+  color: white;
+  font-size: 18px;
+  padding: 0 16px;
+}
+
+.nav-sidebar{
+  cursor: pointer;
+  color: white;
+  display: none;
+  z-index: 100;
+}
+
+.nav-sidebar-content{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 50;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  padding-top: 70px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-sidebar-content ~ .sidebar-black-background{
+  opacity: 0;
+  position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.nav-sidebar-content.open ~ .sidebar-black-background{
+  opacity: 1;
+  z-index: 1;
+}
+
+.nav-sidebar-content.open{
+  left: 50%;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* HEADER END */
+
+.carousel-movies{
+  height: 530px;
+  position: relative;
+}
+
+.carousel-text{
+  position: absolute;
+  top: 289px;
+  left: 114px;
+  text-align: left;
+  color: white;
+  z-index: 2;
+}
+
+.carousel-text h1{
+  font-size: 50px;
+  font-weight: bold;
+  margin: 17px 0;
+  font-family: 'Roboto Slab', serif;
+}
+
+.carousel-text .date{
+   font-size: 18px;
+   margin: 10px 0;
+}
+
+.carousel-text > p{
+  font-size: 16px;
+  width: 750px;
+}
+
+.black-background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* MOVIES LIST */
+
+.title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 900;
+  color: white;
+  font-size: 42px;
+  font-family: 'Roboto Slab', serif;
+}
+
+.list{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(266px, 1fr));
+  gap: 20px;
+  padding: 50px 30px;
+}
+
+.card{
+  position: relative;
+  width: 100%;
+  height: 360px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.card:hover {
+  transform: scale(1.08);
+}
+
+.card > img{
+  border-radius: 12px;
+}
+
+.card-text{
+  position: absolute;
+  top: 190px;
+  left: 50%;
+  z-index: 2;
+  color: rgb(255, 255, 255);
+  padding: 8px;
+  display: none;
+  margin-bottom: 2px;
+  transition: all 0.8s;
+}
+
+
+.card:hover .card-text, .card.hovered .card-text {
+  display: block;
+  left: 0%;
+}
+
+.card:hover .black-screen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.card-text .card-title{
+  font-size: 19px;
+  margin-bottom: 10px;
+  font-weight: bolder;
+  font-family: 'Roboto Slab', serif;
+}
+
+.card-text .date-time{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  margin: 0 5px;
+}
+
+.card-text .date-time span:first-child{
+  display: flex;
+}
+
+.card-text .date-time  .fav_btn{
+  position: absolute;
+    top: 41px;
+    left: 86%;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.fa-star{
+  color: white;
+}
+
+.card-text .card-desc{
+  font-size: 14px;
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+/* SINGLE MOVIE DETAIL */
+
+.movie-container{
+  width: 81%;
+  margin: 0 auto;
+}
+
+.movie-poster{
+  height: 450px;
+  width: 100%;
+  position: relative;
+}
+
+.movie-poster .black-screen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.movie-poster .movie-text{
+  color: white;
+    position: absolute;
+    top: 272px;
+    left: 334px;
+    height: 100%;
+    z-index: 2;
+}
+
+.movie-poster .movie-text h2{
+  font-size: 30px;
+  padding-bottom: 8px;
+  font-weight: 900;
+  font-family: 'Roboto Slab', serif;
+}
+
+.movie-poster .movie-text p{
+  margin-bottom: 6px;
+}
+
+.movie-poster .movie-text .votes{
+  margin-bottom: 5px;
+}
+
+.genres{
+  margin-top: 18px;
+}
+
+.genres  span{
+  border: 1px solid white;
+  border-radius: 20px;
+  margin-right: 20px;
+  padding: 7px 10px;
+}
+
+.movie-poster .poster{
+  width: 272px;
+    height: 372px;
+    position: absolute;
+    top: 245px;
+    left: 45px;
+    z-index: 0;
+}
+
+.Synopsis{
+  color: white;
+  padding: 0 20px;
+  margin: 19px 0 50px 330px;
+}
+
+.Synopsis h3{
+  font-size: 22px;
+  padding: 15px 0px;
+  font-family: 'Roboto Slab', serif;
+}
+
+.Trailer{
+  padding-top: 35px;
+  margin-bottom: 50px;
+}
+
+.Trailer h3, .Recommendations h3{
+  color: white;
+  font-size: 30px;
+  font-family: 'Roboto Slab', serif;
+  padding-bottom: 20px;
+}
+
+.recommend-scroll .card{
+  height: 200px;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.recommend-scroll .card:hover{
+  transform: scale(1);
+}
+
+
+/* DROPDOWN */
+
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
+
+
+/* SCROLL BAR */
+
+.nav-links ::-webkit-scrollbar {
+  width: 8px; 
+  height: 0;
+}
+
+.nav-links ::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+  border-radius: 5px;
+}
+
+.nav-links ::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 5px; 
+}
+
+.nav-links ::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+
+/* PAGINATION BUTTON */
+
+.pagination_btn{
+  display: flex;
+  padding: 0 30px;
+}
+
+.pagination_btn ul{
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  width: 43%;
+  list-style-type: none;
+}
+
+.pagination_btn ul li{
+  cursor: pointer;
+}
+
+
+@media only screen and (max-width: 700px){
+  .header-left{
+    display: none;
+  }
+  
+  .nav-sidebar{
+    display: block;
+  }
+
+  .title{
+    font-size: 30px;
+  }
+  
+  .list{
+    grid-template-columns: 1fr;
+    padding: 30px 75px;
+  }
+
+  .header .logo{
+    margin-right: 3px;
+  }
+
+  .movie_type{
+    margin-bottom: 10px;
+  }
+
+  .movie_type_content{
+    display: none;
+  }
+
+  .movie_type.hovered .movie_type_content{
+    display: block;
+  }
+
+  .movie_type_content .nav-links{
+    display: block;
+    font-size: 15px;
+    color: lightgrey;
+    padding: 3px 0 3px 35px;
+  }
+
+  .search_box{
+    width: 235px;
+  }
+
+  .carousel-movies{
+    height: 295px;
+  }
+
+  .carousel-text{
+    top: 113px;
+    left: 30px;
+  }
+
+  .carousel-text h1{
+    font-size: 22px;
+    margin: 12px 0;
+  }
+
+  .carousel-text .date{
+    font-size: 12px;
+    margin: 7px 0;
+  }
+
+  .carousel-text > p{
+    font-size: 13px;
+    width: fit-content;
+  }
+
+  .pagination_btn{
+    display: block;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .pagination_btn ul{
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pagination_btn ul li{
+    padding: 3px 8px;
+  }
+
+  .movie-container{
+    width: 90%;
+  }
+
+  .movie-poster{
+    height: 0;
+  }
+
+  .movie-poster .poster{
+    top: 21px;
+    left: 12%;
+  }
+
+  .movie-poster .movie-text{
+    top: 411px;
+    left: 0;
+  }
+
+  .movie-poster .movie-text h2{
+    font-size: 18px;
+  }
+ 
+  .genres{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 0;
+  }
+
+  .genres span{
+    margin-right: 14px;
+  }
+
+  .Synopsis{
+    padding: 0;
+    margin: 620px 0 47px 2px;
+  }
+
+  .Trailer .Teaser_video iframe{
+    height: 309px;
+  }
+}
+
+
+
+
+
+
