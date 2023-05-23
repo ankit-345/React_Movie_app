@@ -1,4 +1,4 @@
-Live - (https://superb-cranachan-f6aba9.netlify.app).
+Live - (https://react-movie-app-345.netlify.app/).
 
 # Getting Started with Create React App
 
