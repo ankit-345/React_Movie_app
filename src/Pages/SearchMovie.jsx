@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { myContext } from '../App'
 import Card from '../components/Card';
+import debounce from 'lodash.debounce'
 
 const SearchMovie = () => {
     const {searchText} = useContext(myContext);
@@ -12,12 +13,14 @@ const SearchMovie = () => {
         setSearchMovies(data.results);
     }
 
-    useEffect(() =>{
-      setTimeout(() =>{
-        fetchData();
-      }, 2500)
+     const debouncedFetchData = debounce(fetchData, 1000);
 
-      return () => clearTimeout(fetchData);
+    useEffect(() =>{
+      debouncedFetchData();
+
+      return () =>{
+        debouncedFetchData.cancel();
+      };
 
     }, [searchText]); 
 
